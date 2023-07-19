@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class ParesComDiferencaK {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(); // Tamanho do array
+        int k = sc.nextInt(); // Valor alvo
+
+        int[] arr = new int[n]; // Array de inteiros
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int resultado = contarParesComDiferencaK(arr, k);
+        System.out.println(resultado);
+
+        sc.close();
+    }
+
+    public static int contarParesComDiferencaK(int[] arr, int k) {
+        // Ordena o array para facilitar a busca
+        Arrays.sort(arr);
+
+        int count = 0;
+        int left = 0;
+        int right = 1;
+
+        // Enquanto o ponteiro "right" estiver dentro do array
+        while (right < arr.length) {
+            int diff = arr[right] - arr[left];
+
+            // Se a diferença for igual a "k", encontramos um par
+            if (diff == k) {
+                count++;
+                right++;
+            }
+            // Se a diferença for maior que "k", movemos o ponteiro "left" para a direita
+            else if (diff > k) {
+                left++;
+            }
+            // Se a diferença for menor que "k", movemos o ponteiro "right" para a direita
+            else {
+                right++;
+            }
+
+            // Garantimos que "right" esteja sempre à direita de "left"
+            if (right <= left) {
+                right = left + 1;
+            }
+        }
+
+        return count;
+    }
+}
