@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class DesembaralharLinhas {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt(); // Quantidade de casos de teste
+        sc.nextLine(); // Lê o resto da linha após o inteiro
+
+        for (int i = 0; i < N; i++) {
+            String linha = sc.nextLine();
+            String decifrada = desembaralharLinha(linha);
+            System.out.println(decifrada);
+        }
+
+        sc.close();
+    }
+
+    public static String desembaralharLinha(String linha) {
+        int tamanho = linha.length();
+        int meio = tamanho / 2;
+
+        StringBuilder sb = new StringBuilder();
+
+        // Começa do meio da linha e vai para a esquerda
+        for (int i = meio - 1; i >= 0; i--) {
+            sb.append(linha.charAt(i));
+        }
+
+        // Continua a partir do meio da linha e vai para a direita
+        for (int i = tamanho - 1; i >= meio; i--) {
+            sb.append(linha.charAt(i));
+        }
+
+        return sb.toString();
+    }
+}
